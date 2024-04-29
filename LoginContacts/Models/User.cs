@@ -8,7 +8,7 @@ namespace Login.Models
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public List<Contact>? Contacts { get; set; }
+        public ICollection<Contact>? Contacts { get; set; }
     }
 
     public class Contact

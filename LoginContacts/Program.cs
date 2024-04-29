@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using LoginContacts.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<LoginContactsContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("LoginContactsContext") ?? throw new InvalidOperationException("Connection string 'LoginContactsContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Index}/{id?}");
 
 app.Run();
