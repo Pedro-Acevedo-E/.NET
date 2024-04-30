@@ -276,3 +276,10 @@
 /Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/obj/Debug/net8.0/LoginContacts.pdb
 /Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/obj/Debug/net8.0/LoginContacts.genruntimeconfig.cache
 /Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/obj/Debug/net8.0/ref/LoginContacts.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/System.Web.Mvc.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/System.Web.Razor.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/System.Web.Helpers.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/System.Web.WebPages.Deployment.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/System.Web.WebPages.Razor.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/System.Web.WebPages.dll
+/Users/pedroacevedo/Documents/Projectos .NET/MicrosoftTutorials/LoginContacts/bin/Debug/net8.0/Microsoft.Web.Infrastructure.dll

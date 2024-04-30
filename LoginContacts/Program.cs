@@ -9,6 +9,17 @@ builder.Services.AddDbContext<LoginContactsContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//added to access session
+builder.Services.AddDistributedMemoryCache();
+
+// Http Session options
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(120);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +36,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
