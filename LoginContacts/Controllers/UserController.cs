@@ -44,18 +44,21 @@ namespace LoginContacts.Controllers {
         [HttpPost]
         public async Task<IActionResult> Login([Bind("Id,Email,Password")] User user)
         {
-            var usr = await _context.User
-                .FirstOrDefaultAsync(m => 
-                    m.Email == user.Email && m.Password == user.Password
-                );
+            if (ModelState.IsValid)
+            {
+                var usr = await _context.User
+                    .FirstOrDefaultAsync(m => 
+                        m.Email == user.Email && m.Password == user.Password
+                    );
 
-            if (usr == null) {
-                Console.WriteLine("No user found");
-            } else {
-                HttpContext.Session.SetString("_UserSession", usr.Id.ToString());
-                return RedirectToAction("Details", new {id = usr.Id});
+                if (usr == null) {
+                    ViewData["LoginError"] = "Invalid Credentials";
+                    return View();
+                } else {
+                    HttpContext.Session.SetString("_UserSession", usr.Id.ToString());
+                    return RedirectToAction("Details", new {id = usr.Id});
+                }
             }
-            
             return View();
         }
 
@@ -90,8 +93,6 @@ namespace LoginContacts.Controllers {
         }
 
         // POST: User/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Email,Password")] User user)
@@ -285,8 +286,6 @@ namespace LoginContacts.Controllers {
                     return NotFound();
                 }
 
-                Console.WriteLine("Create contact for: " + id);
-
                 ViewData["CurrentUser"] = id;
                 return View();
             }
@@ -295,23 +294,20 @@ namespace LoginContacts.Controllers {
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateContact([Bind("Id,Name,LastName,PhoneNumber,UserId")] Contact contact)
+        public async Task<IActionResult> CreateContact([Bind("Name,LastName,PhoneNumber,UserId")] Contact contact)
         {
-            if(UserIsLoggedIn()) {
-                Contact ct = new Contact();
-                ct.Name = contact.Name;
-                ct.LastName = contact.LastName;
-                ct.PhoneNumber = contact.PhoneNumber;
-                ct.UserId = contact.Id;
-                
-                _context.Add(ct);
-                await _context.SaveChangesAsync();
-                
-                return RedirectToAction("Edit", new {id = ct.UserId});
-            }
+            if(ModelState.IsValid) {
+                if(UserIsLoggedIn()) {
+                    _context.Add(contact);
+                    await _context.SaveChangesAsync();
+                    
+                    return RedirectToAction("Edit", new {id = contact.UserId});
+                }
 
-            return RedirectToAction(nameof(Login));
+                return RedirectToAction(nameof(Login));
+            }
+            @ViewData["CurrentUser"] =contact.UserId;
+            return View(contact);
         }
 
         
